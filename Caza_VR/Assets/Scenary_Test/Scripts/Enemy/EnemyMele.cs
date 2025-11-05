@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System;
 using System.Collections;
-using UnityEngine.PlayerLoop;
 
 public class EnemyMele : Enemy
 {
     [Header("Resources")]
     private PatrolForPoints _patrolMovement;
+    private StateMachine stateMachine;
 
     [Header("Patrol")]
     public Transform[] patrolPoints;
@@ -17,20 +16,30 @@ public class EnemyMele : Enemy
 
     public Transform player;
 
+    public void Initialized()
+    {
+        _patrolMovement = new PatrolForPoints(agent, patrolPoints, patrolIndex);
+    }
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         
     }
-    private void Start()
+    void Start()
     {
-        _patrolMovement = new PatrolForPoints(agent, patrolPoints, patrolIndex);
+        Initialized();
+        stateMachine = new StateMachine();
+        ChangeState(new IdleState(this));
     }
 
     void Update()
     {
         _patrolMovement?.ChangeDestination();
+    }
+    public void ChangeState(IState newState)
+    {
+        stateMachine.ChangeState(newState);
     }
     public void OnTriggerEnter(Collider other)
     {
