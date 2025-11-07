@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     void Update()
     {
         elapsedFireTime += Time.deltaTime;
-        if (elapsedFireTime >= cooldown) { elapsedFireTime = 0; Shoot(); }
+        //if (elapsedFireTime >= cooldown) { elapsedFireTime = 0; Shoot(); }
     }
     public void Shoot()
     {

@@ -465,6 +465,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPusuit
   health: 50
+  respawnDelay: 3
+  respawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nameTag: EnemyLight
   target: {fileID: 0}
 --- !u!1 &4122283231128015662
 GameObject:
